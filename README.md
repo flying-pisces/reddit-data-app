@@ -21,9 +21,9 @@ Extract market sentiment, trending tickers, and trading signals from Reddit's mo
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/cyin/reddit-data?style=flat-square&logo=github)](https://github.com/cyin/reddit-data/stargazers)
-[![Forks](https://img.shields.io/github/forks/cyin/reddit-data?style=flat-square&logo=github)](https://github.com/cyin/reddit-data/network)
-[![Issues](https://img.shields.io/github/issues/cyin/reddit-data?style=flat-square&logo=github)](https://github.com/cyin/reddit-data/issues)
+[![Stars](https://img.shields.io/github/stars/flying-pisces/reddit-data?style=flat-square&logo=github)](https://github.com/flying-pisces/reddit-data/stargazers)
+[![Forks](https://img.shields.io/github/forks/flying-pisces/reddit-data?style=flat-square&logo=github)](https://github.com/flying-pisces/reddit-data/network)
+[![Issues](https://img.shields.io/github/issues/flying-pisces/reddit-data?style=flat-square&logo=github)](https://github.com/flying-pisces/reddit-data/issues)
 
 ## 🌟 **Three Ways to Monitor Reddit**
 
@@ -97,7 +97,7 @@ $ python main.py monitor
 ### **Option 1: Interactive Setup (Recommended)**
 ```bash
 # 1. Clone and setup
-git clone https://github.com/cyin/reddit-data.git
+git clone https://github.com/flying-pisces/reddit-data.git
 cd reddit-data
 pip install -r requirements.txt
 
@@ -471,27 +471,27 @@ git push origin feature/amazing-feature
 
 ## 📊 **Project Stats**
 
-[![GitHub stars](https://img.shields.io/github/stars/cyin/reddit-data?style=social)](https://github.com/cyin/reddit-data)
-[![GitHub forks](https://img.shields.io/github/forks/cyin/reddit-data?style=social)](https://github.com/cyin/reddit-data/network)
-[![GitHub watchers](https://img.shields.io/github/watchers/cyin/reddit-data?style=social)](https://github.com/cyin/reddit-data/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/flying-pisces/reddit-data?style=social)](https://github.com/flying-pisces/reddit-data)
+[![GitHub forks](https://img.shields.io/github/forks/flying-pisces/reddit-data?style=social)](https://github.com/flying-pisces/reddit-data/network)
+[![GitHub watchers](https://img.shields.io/github/watchers/flying-pisces/reddit-data?style=social)](https://github.com/flying-pisces/reddit-data/watchers)
 
 <table>
 <tr>
 <td align="center">
 <strong>🔥 Activity</strong><br>
-<img src="https://img.shields.io/github/commit-activity/m/cyin/reddit-data">
+<img src="https://img.shields.io/github/commit-activity/m/flying-pisces/reddit-data">
 </td>
 <td align="center">
 <strong>📈 Downloads</strong><br>
-<img src="https://img.shields.io/github/downloads/cyin/reddit-data/total">
+<img src="https://img.shields.io/github/downloads/flying-pisces/reddit-data/total">
 </td>
 <td align="center">
 <strong>🐛 Issues</strong><br>
-<img src="https://img.shields.io/github/issues-closed/cyin/reddit-data">
+<img src="https://img.shields.io/github/issues-closed/flying-pisces/reddit-data">
 </td>
 <td align="center">
 <strong>🚀 PRs</strong><br>
-<img src="https://img.shields.io/github/issues-pr-closed/cyin/reddit-data">
+<img src="https://img.shields.io/github/issues-pr-closed/flying-pisces/reddit-data">
 </td>
 </tr>
 </table>
@@ -521,10 +521,10 @@ MIT License - Feel free to use this project for:
 
 ### **🌟 Star this project if you find it useful! 🌟**
 
-[![GitHub stars](https://img.shields.io/github/stars/cyin/reddit-data?style=for-the-badge&logo=github)](https://github.com/cyin/reddit-data/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/flying-pisces/reddit-data?style=for-the-badge&logo=github)](https://github.com/flying-pisces/reddit-data/stargazers)
 
-**Made with ❤️ by [cyin](https://github.com/cyin) and [contributors](https://github.com/cyin/reddit-data/contributors)**
+**Made with ❤️ by [flying-pisces](https://github.com/flying-pisces) and [contributors](https://github.com/flying-pisces/reddit-data/contributors)**
 
-[🐛 Report Bug](https://github.com/cyin/reddit-data/issues) • [✨ Request Feature](https://github.com/cyin/reddit-data/issues) • [💬 Discussions](https://github.com/cyin/reddit-data/discussions)
+[🐛 Report Bug](https://github.com/flying-pisces/reddit-data/issues) • [✨ Request Feature](https://github.com/flying-pisces/reddit-data/issues) • [💬 Discussions](https://github.com/flying-pisces/reddit-data/discussions)
 
 </div>
