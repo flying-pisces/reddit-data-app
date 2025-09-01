@@ -1,0 +1,20 @@
+{
+  "subreddit_stats": {
+    "wallstreetbets": 45,
+    "stocks": 32,
+    "investing": 28,
+    "options": 19,
+    "pennystocks": 15,
+    "StockMarket": 12,
+    "SecurityAnalysis": 8,
+    "ValueInvesting": 6
+  },
+  "metadata": {
+    "last_updated": "2025-01-01T12:00:00Z",
+    "total_posts": 165,
+    "total_tickers": 20,
+    "subreddits_monitored": 8,
+    "data_source": "GitHub Actions (Sample Data)",
+    "update_frequency": "Hourly"
+  }
+}

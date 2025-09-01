@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2025-01-01T12:00:00Z",
+    "total_posts": 165,
+    "total_tickers": 20,
+    "top_ticker": "$GME",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-01-01T11:00:00Z", 
+    "total_posts": 142,
+    "total_tickers": 18,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "wallstreetbets", 
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-01-01T10:00:00Z",
+    "total_posts": 128,
+    "total_tickers": 16,
+    "top_ticker": "$TSLA",
+    "top_subreddit": "stocks",
+    "sentiment": "Neutral"
+  }
+]

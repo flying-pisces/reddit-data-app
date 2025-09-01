@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sample1",
+    "title": "$AAPL beats earnings expectations by 15% - analysts upgrade targets 🚀",
+    "subreddit": "wallstreetbets",
+    "author": "AppleBull2024",
+    "score": 2847,
+    "num_comments": 612,
+    "created_utc": 1735725600,
+    "url": "https://reddit.com/r/wallstreetbets/comments/sample1/aapl_beats_earnings/",
+    "selftext": "Apple just reported incredible Q4 results. Revenue up 15%, iPhone sales crushing it in Asia. Time to YOLO on calls! 📈",
+    "timestamp": "2025-01-01T12:00:00Z"
+  },
+  {
+    "id": "sample2", 
+    "title": "Tesla $TSLA production numbers exceed all estimates - Cybertruck ramping fast",
+    "subreddit": "stocks",
+    "author": "TeslaFanatic",
+    "score": 1923,
+    "num_comments": 387,
+    "created_utc": 1735722000,
+    "url": "https://reddit.com/r/stocks/comments/sample2/tesla_production/",
+    "selftext": "Q4 delivery numbers just dropped. Tesla delivered 500k+ vehicles, beating all Wall Street estimates.",
+    "timestamp": "2025-01-01T11:00:00Z"
+  },
+  {
+    "id": "sample3",
+    "title": "NVIDIA $NVDA announces next-gen AI chip - gaming and data center demand soaring",
+    "subreddit": "investing", 
+    "author": "AIInvestor",
+    "score": 1654,
+    "num_comments": 234,
+    "created_utc": 1735718400,
+    "url": "https://reddit.com/r/investing/comments/sample3/nvidia_ai_chip/",
+    "selftext": "New RTX 5080 benchmarks leaked. 40% faster than RTX 4080. Data center revenue guidance raised 25%.",
+    "timestamp": "2025-01-01T10:00:00Z"
+  },
+  {
+    "id": "sample4",
+    "title": "Microsoft $MSFT cloud business grows 30% YoY - Azure gaining market share",
+    "subreddit": "stocks",
+    "author": "CloudBullish",
+    "score": 1456,
+    "num_comments": 189,
+    "created_utc": 1735714800,
+    "url": "https://reddit.com/r/stocks/comments/sample4/msft_cloud/",
+    "selftext": "Azure revenue up 30% year-over-year. Enterprise customers migrating from AWS at accelerating pace.",
+    "timestamp": "2025-01-01T09:00:00Z"
+  },
+  {
+    "id": "sample5",
+    "title": "GameStop $GME short interest drops to 15% - potential for squeeze diminishing",
+    "subreddit": "wallstreetbets",
+    "author": "ApeAnalyst",
+    "score": 3421,
+    "num_comments": 892,
+    "created_utc": 1735711200,
+    "url": "https://reddit.com/r/wallstreetbets/comments/sample5/gme_short_interest/",
+    "selftext": "Latest Ortex data shows GME short interest at 15%, down from 25% last month. Diamond hands still holding strong! 💎🙌",
+    "timestamp": "2025-01-01T08:00:00Z"
+  }
+]
