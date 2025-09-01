@@ -80,9 +80,22 @@
 
             <!-- Demo Notice -->
             <div class="demo-notice">
-                <h4>🎮 Interactive Demo</h4>
-                <p>This is a static demonstration with sample data. 
-                   <strong>Download the full version</strong> to connect to Reddit's API for live monitoring.</p>
+                <div class="demo-status-header">
+                    <div class="demo-status-left">
+                        <h4>📊 Reddit Data Engine - Live Status</h4>
+                        <div class="status-indicators">
+                            <span id="connectionStatus" class="status-indicator">📊 Loading Data...</span>
+                            <span id="dataTimestamp" class="data-timestamp">Last updated: Loading...</span>
+                        </div>
+                    </div>
+                    <div class="demo-buttons">
+                        <button id="startBtn" class="btn btn-success" onclick="startMonitoring()">▶ Start Monitoring</button>
+                        <button id="stopBtn" class="btn btn-danger" onclick="stopMonitoring()" disabled>⏹ Stop</button>
+                        <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <p><strong>GitHub Actions Integration:</strong> Data automatically updates every hour via scheduled workflows.
+                   <strong><a href="https://github.com/flying-pisces/reddit-data/actions" target="_blank">View automation logs →</a></strong></p>
             </div>
 
             <!-- Stats Cards Row -->

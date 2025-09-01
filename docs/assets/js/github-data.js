@@ -328,10 +328,38 @@ function updateConnectionStatus(status) {
 
 function updateDataTimestamp() {
     const lastUpdateEl = document.getElementById('lastUpdate');
-    if (lastUpdateEl && dataCache.stats?.metadata?.last_updated) {
+    const dataTimestamp = document.getElementById('dataTimestamp');
+    
+    if (dataCache.stats?.metadata?.last_updated) {
         const updateTime = new Date(dataCache.stats.metadata.last_updated);
-        lastUpdateEl.textContent = `Last update: ${updateTime.toLocaleTimeString()} (GitHub Actions)`;
+        const timeString = `${updateTime.toLocaleDateString()} ${updateTime.toLocaleTimeString()}`;
+        
+        if (lastUpdateEl) {
+            lastUpdateEl.textContent = `Last update: ${timeString} (GitHub Actions)`;
+        }
+        
+        if (dataTimestamp) {
+            dataTimestamp.textContent = `Last updated: ${timeString}`;
+        }
     }
+}
+
+// Placeholder functions for demo buttons
+function startMonitoring() {
+    showGitHubNotification('📊 GitHub Actions handles monitoring automatically every hour', 'info');
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('stopBtn').disabled = false;
+}
+
+function stopMonitoring() {
+    showGitHubNotification('ℹ️ Monitoring continues via GitHub Actions schedule', 'info');
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('stopBtn').disabled = true;
+}
+
+function refreshData() {
+    showGitHubNotification('🔄 Checking for latest GitHub Actions data...', 'info');
+    checkForDataUpdates();
 }
 
 // Utility functions
@@ -471,3 +499,6 @@ function loadDemoData() {
 // Export for global access
 window.initializeGitHubData = initializeGitHubData;
 window.checkForDataUpdates = checkForDataUpdates;
+window.startMonitoring = startMonitoring;
+window.stopMonitoring = stopMonitoring;
+window.refreshData = refreshData;

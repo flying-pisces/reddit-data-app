@@ -16,12 +16,37 @@ from collections import Counter, defaultdict
 sys.path.append(str(Path(__file__).parent.parent))
 
 try:
-    from reddit_client import RedditClient
-    from data_processor import DataProcessor
+    import praw
+    print("✅ PRAW imported successfully")
 except ImportError as e:
-    print(f"Import error: {e}")
-    print("This script should be run from the repository root or have reddit_client.py available")
+    print(f"❌ Failed to import PRAW: {e}")
     sys.exit(1)
+
+# For GitHub Actions, we'll use PRAW directly instead of our custom client
+def create_reddit_client():
+    """Create Reddit client using environment variables"""
+    reddit_client_id = os.getenv('REDDIT_CLIENT_ID')
+    reddit_client_secret = os.getenv('REDDIT_CLIENT_SECRET') 
+    reddit_user_agent = os.getenv('REDDIT_USER_AGENT')
+    
+    if not all([reddit_client_id, reddit_client_secret, reddit_user_agent]):
+        print("❌ Missing Reddit API credentials in environment variables")
+        return None
+    
+    try:
+        reddit = praw.Reddit(
+            client_id=reddit_client_id,
+            client_secret=reddit_client_secret,
+            user_agent=reddit_user_agent
+        )
+        
+        # Test the connection
+        reddit.user.me()  # This will fail if credentials are wrong
+        return reddit
+        
+    except Exception as e:
+        print(f"❌ Failed to create Reddit client: {e}")
+        return None
 
 def ensure_data_directory():
     """Create docs/data directory if it doesn't exist"""
@@ -34,12 +59,11 @@ def fetch_reddit_data():
     print("🚀 Starting Reddit data fetch...")
     
     # Initialize Reddit client
-    try:
-        client = RedditClient()
-        print("✅ Reddit client initialized")
-    except Exception as e:
-        print(f"❌ Failed to initialize Reddit client: {e}")
+    reddit = create_reddit_client()
+    if not reddit:
         return None
+    
+    print("✅ Reddit client initialized")
     
     # Subreddits to monitor
     subreddits = [
@@ -63,8 +87,9 @@ def fetch_reddit_data():
         try:
             print(f"  📊 Processing r/{subreddit}...")
             
-            # Fetch hot posts
-            posts = client.get_hot_posts(subreddit, limit=25)
+            # Fetch hot posts using PRAW
+            subreddit_obj = reddit.subreddit(subreddit)
+            posts = list(subreddit_obj.hot(limit=25))
             
             for post in posts:
                 # Convert post to dict for JSON serialization
