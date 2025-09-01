@@ -153,29 +153,6 @@ cd gui && ./launch_web.sh
 # Then open: http://localhost:5000
 ```
 
-## 🖼️ **Interface Screenshots**
-
-### **🌐 Web Dashboard (Flask)**
-![Web Dashboard](docs/assets/images/web-dashboard-screenshot.png)
-
-**Features:**
-- 📊 Real-time Reddit feed with clickable post titles
-- 💹 Live ticker tracking with mention counts  
-- 📈 Interactive charts and sentiment analysis
-- 🔗 Direct links to original Reddit posts
-- 📱 Responsive design for all devices
-
-### **🖥️ Desktop GUI (Tkinter)**  
-![Desktop GUI](docs/assets/images/desktop-gui-screenshot.png)
-
-**Features:**
-- 📋 Multi-tab interface (Monitor, Tickers, Insights, Export, Settings)
-- ⚡ Real-time status updates and connection indicators
-- 🖱️ Double-click posts to open in browser
-- 💾 Export functionality with customizable formats
-- 🎨 Native desktop experience
-
----
 
 ## 📊 **Live Data Examples**
 
