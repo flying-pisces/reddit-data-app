@@ -83,7 +83,7 @@ def get_tickers():
                 'symbol': ticker,
                 'count': data['count'],
                 'sentiment': data.get('sentiment', 0),
-                'subreddits': data.get('subreddits', [])
+                'subreddits': list(data.get('subreddits', set()))
             }
             for ticker, data in sorted_tickers[:20]
         ]
@@ -154,6 +154,15 @@ def export_data():
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         filename = f"exports/web_export_{timestamp}.json"
         
+        # Convert sets to lists for JSON serialization
+        tickers_for_export = {}
+        for ticker, data in monitor_data['tickers'].items():
+            tickers_for_export[ticker] = {
+                'count': data['count'],
+                'sentiment': data.get('sentiment', 0),
+                'subreddits': list(data.get('subreddits', set()))
+            }
+        
         export_data = {
             'metadata': {
                 'timestamp': datetime.now().isoformat(),
@@ -162,7 +171,7 @@ def export_data():
                 'hours_back': hours
             },
             'posts': monitor_data['posts'],
-            'tickers': monitor_data['tickers'],
+            'tickers': tickers_for_export,
             'statistics': monitor_data['stats']
         }
         
