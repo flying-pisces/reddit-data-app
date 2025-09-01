@@ -32,7 +32,7 @@ jobs:
       run: |
         echo "REDDIT_CLIENT_ID=$REDDIT_CLIENT_ID" > .env
         echo "REDDIT_CLIENT_SECRET=$REDDIT_CLIENT_SECRET" >> .env
-        echo "REDDIT_USER_AGENT=$REDDIT_USER_AGENT" >> .env
+        echo "REDDIT_USER_AGENT=reddit-monitor:v1.0" >> .env
         
     - name: Collect live Reddit data
       run: |
