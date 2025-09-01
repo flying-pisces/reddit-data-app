@@ -137,14 +137,13 @@ class DataProcessor:
                 if pattern.search(content):
                     priority_posts.append(post)
                     break
-            
-            # High engagement posts
-            elif post.score > 500 or post.num_comments > 200:
-                priority_posts.append(post)
-            
-            # Rapid growth detection
-            elif self._is_trending_post(post):
-                priority_posts.append(post)
+            else:
+                # High engagement posts
+                if post.score > 500 or post.num_comments > 200:
+                    priority_posts.append(post)
+                # Rapid growth detection
+                elif self._is_trending_post(post):
+                    priority_posts.append(post)
         
         return priority_posts
     
