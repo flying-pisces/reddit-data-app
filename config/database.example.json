@@ -1,0 +1,118 @@
+{
+    "_comment": "Reddit Data Engine - Database Configuration Template",
+    "_description": "Copy this file to database.json and configure for persistent data storage",
+    "_note": "The application works perfectly without database configuration - this is optional for advanced users",
+    
+    "database": {
+        "_comment": "Database connection settings",
+        "enabled": false,
+        "type": "postgresql",
+        "host": "localhost",
+        "port": 5432,
+        "name": "reddit_data_engine",
+        "user": "your_username",
+        "password": "your_password",
+        "ssl_mode": "prefer",
+        "connection_pool_size": 10,
+        "connection_timeout": 30
+    },
+    
+    "storage": {
+        "_comment": "Data storage and retention settings",
+        "enable_persistence": true,
+        "data_retention_days": 30,
+        "auto_cleanup": true,
+        "backup_enabled": false,
+        "backup_interval_hours": 24,
+        "backup_location": "./backups/"
+    },
+    
+    "export": {
+        "_comment": "Data export configuration",
+        "default_format": "json",
+        "available_formats": ["json", "csv", "parquet"],
+        "compression": "gzip",
+        "include_metadata": true,
+        "export_location": "./exports/"
+    },
+    
+    "monitoring": {
+        "_comment": "Monitoring and alerting settings",
+        "enable_health_checks": true,
+        "health_check_interval": 60,
+        "alert_on_connection_loss": false,
+        "max_memory_usage_mb": 512,
+        "log_level": "INFO"
+    },
+    
+    "tables": {
+        "_comment": "Database table configurations (auto-created if not exists)",
+        "posts": {
+            "table_name": "reddit_posts",
+            "indexes": ["subreddit", "created_utc", "score"],
+            "partition_by": "created_date"
+        },
+        "tickers": {
+            "table_name": "ticker_mentions",
+            "indexes": ["symbol", "mention_date", "sentiment"],
+            "partition_by": "mention_date"
+        },
+        "subreddits": {
+            "table_name": "subreddit_stats",
+            "indexes": ["name", "activity_date"],
+            "partition_by": "activity_date"
+        },
+        "user_activity": {
+            "table_name": "user_mentions",
+            "indexes": ["username", "mention_date"],
+            "partition_by": "mention_date"
+        }
+    },
+    
+    "alternative_configs": {
+        "_comment": "Alternative database configurations for different environments",
+        
+        "sqlite_local": {
+            "type": "sqlite",
+            "file_path": "./data/reddit_data.db",
+            "wal_mode": true,
+            "cache_size": 10000
+        },
+        
+        "mysql": {
+            "type": "mysql",
+            "host": "localhost",
+            "port": 3306,
+            "name": "reddit_data",
+            "user": "reddit_user",
+            "password": "secure_password",
+            "charset": "utf8mb4"
+        },
+        
+        "mongodb": {
+            "type": "mongodb",
+            "connection_string": "mongodb://localhost:27017/reddit_data",
+            "collection_prefix": "rde_",
+            "enable_sharding": false
+        }
+    },
+    
+    "performance": {
+        "_comment": "Performance optimization settings",
+        "batch_insert_size": 1000,
+        "enable_bulk_operations": true,
+        "use_connection_pooling": true,
+        "cache_query_results": true,
+        "cache_ttl_seconds": 300,
+        "async_writes": true
+    },
+    
+    "security": {
+        "_comment": "Database security settings",
+        "encrypt_sensitive_data": true,
+        "use_prepared_statements": true,
+        "enable_audit_logging": false,
+        "audit_log_location": "./logs/audit.log",
+        "rotate_logs": true
+    }
+}

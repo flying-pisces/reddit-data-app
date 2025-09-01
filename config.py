@@ -2,38 +2,59 @@
 Reddit Data Engine Configuration
 """
 import os
+import json
 from typing import Dict, List
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Try to load from config.json first, fall back to environment variables
+config_file = Path('config.json')
+config_data = {}
+if config_file.exists():
+    try:
+        with open(config_file, 'r') as f:
+            config_data = json.load(f)
+    except Exception:
+        pass
+
 class RedditConfig:
     """Reddit API configuration"""
-    CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
-    CLIENT_SECRET = os.getenv('REDDIT_CLIENT_SECRET')
-    USER_AGENT = os.getenv('REDDIT_USER_AGENT', 'RedditDataEngine/1.0')
-    USERNAME = os.getenv('REDDIT_USERNAME')
-    PASSWORD = os.getenv('REDDIT_PASSWORD')
+    # Load from config.json first, then environment variables
+    reddit_config = config_data.get('reddit', {})
+    CLIENT_ID = reddit_config.get('client_id') or os.getenv('REDDIT_CLIENT_ID')
+    CLIENT_SECRET = reddit_config.get('client_secret') or os.getenv('REDDIT_CLIENT_SECRET')
+    USER_AGENT = reddit_config.get('user_agent') or os.getenv('REDDIT_USER_AGENT', 'RedditDataEngine/1.0')
+    USERNAME = reddit_config.get('username') or os.getenv('REDDIT_USERNAME')
+    PASSWORD = reddit_config.get('password') or os.getenv('REDDIT_PASSWORD')
 
 class MonitoringConfig:
     """Monitoring and data collection settings"""
     
-    # Target subreddits organized by category
-    SUBREDDITS: Dict[str, List[str]] = {
-        'yolo_meme': ['wallstreetbets'],
-        'serious_investing': ['stocks', 'investing'],
-        'speculative': ['pennystocks'],
-        'value_oriented': ['UndervaluedStonks', 'ValueInvesting'],
-        'options_focus': ['options'],
-        'trading': ['trading', 'technicalanalysis', 'daytrading'],
-        'sector_specific': ['stockmarket', 'biotech_stocks', 'SecurityAnalysis']
-    }
+    # Load monitoring settings from config.json if available
+    monitoring_config = config_data.get('monitoring', {})
     
-    # Flattened list for easy iteration
-    ALL_SUBREDDITS = [sub for subs in SUBREDDITS.values() for sub in subs]
+    # Target subreddits - can be overridden by config.json
+    if 'subreddits' in monitoring_config:
+        # Simple list from config.json
+        ALL_SUBREDDITS = monitoring_config['subreddits']
+        SUBREDDITS = {'general': ALL_SUBREDDITS}
+    else:
+        # Default categorized subreddits
+        SUBREDDITS: Dict[str, List[str]] = {
+            'yolo_meme': ['wallstreetbets'],
+            'serious_investing': ['stocks', 'investing'],
+            'speculative': ['pennystocks'],
+            'value_oriented': ['UndervaluedStonks', 'ValueInvesting'],
+            'options_focus': ['options'],
+            'trading': ['trading', 'technicalanalysis', 'daytrading'],
+            'sector_specific': ['stockmarket', 'biotech_stocks', 'SecurityAnalysis']
+        }
+        ALL_SUBREDDITS = [sub for subs in SUBREDDITS.values() for sub in subs]
     
     # Monitoring intervals (seconds)
-    HOT_POSTS_INTERVAL = 60
+    HOT_POSTS_INTERVAL = monitoring_config.get('refresh_interval', 60)
     NEW_POSTS_INTERVAL = 30
     RISING_POSTS_INTERVAL = 45
     

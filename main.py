@@ -49,17 +49,37 @@ async def test_connection():
         # Test basic connection
         print("✅ Reddit client initialized")
         
-        # Test subreddit access
-        posts = client.get_hot_posts('stocks', limit=5)
-        print(f"✅ Successfully fetched {len(posts)} posts from r/stocks")
+        # Test subreddit access - try multiple subreddits
+        test_subreddits = ['python', 'programming', 'technology']
+        successful_fetches = 0
+        total_posts = 0
         
-        if posts:
-            sample_post = posts[0]
-            print(f"📄 Sample post: '{sample_post.title[:50]}...'")
-            print(f"   Score: {sample_post.score}, Comments: {sample_post.num_comments}")
+        for subreddit in test_subreddits:
+            posts = client.get_hot_posts(subreddit, limit=5)
+            if posts:
+                successful_fetches += 1
+                total_posts += len(posts)
+                print(f"✅ Fetched {len(posts)} posts from r/{subreddit}")
+                
+                # Show sample from first successful fetch
+                if successful_fetches == 1:
+                    sample_post = posts[0]
+                    print(f"\n📄 Sample post: '{sample_post.title[:60]}...'")
+                    print(f"   Score: {sample_post.score}, Comments: {sample_post.num_comments}")
+            else:
+                print(f"⚠️  Could not fetch posts from r/{subreddit}")
         
-        print("🎉 Connection test successful!")
-        return True
+        if successful_fetches > 0:
+            print(f"\n🎉 Connection test successful!")
+            print(f"📊 Fetched {total_posts} posts from {successful_fetches}/{len(test_subreddits)} subreddits")
+            return True
+        else:
+            print("\n❌ Connection test failed: Could not fetch posts from any subreddit")
+            print("Please check:")
+            print("  1. Your Reddit API credentials in .env file")
+            print("  2. Client ID and Secret are correct")
+            print("  3. The app type is 'script' in Reddit settings")
+            return False
         
     except Exception as e:
         print(f"❌ Connection test failed: {e}")

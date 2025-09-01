@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from pathlib import Path
 import logging
+from collections import Counter
 
 from data_processor import DataProcessor
 from reddit_client import RedditClient, AsyncRedditClient

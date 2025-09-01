@@ -1,5 +1,6 @@
 # Environment and configuration
 .env
+config.json
 *.log
 
 # Python

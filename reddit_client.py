@@ -53,24 +53,29 @@ class RedditClient:
     def _setup_client(self):
         """Initialize Reddit client"""
         try:
-            self.reddit = praw.Reddit(
-                client_id=RedditConfig.CLIENT_ID,
-                client_secret=RedditConfig.CLIENT_SECRET,
-                user_agent=RedditConfig.USER_AGENT,
-                username=RedditConfig.USERNAME,
-                password=RedditConfig.PASSWORD
-            )
-            # Test connection
-            self.reddit.user.me()
-            self.logger.info("Reddit client initialized successfully")
+            # Use read-only mode if no username/password provided
+            if RedditConfig.USERNAME and RedditConfig.PASSWORD:
+                self.reddit = praw.Reddit(
+                    client_id=RedditConfig.CLIENT_ID,
+                    client_secret=RedditConfig.CLIENT_SECRET,
+                    user_agent=RedditConfig.USER_AGENT,
+                    username=RedditConfig.USERNAME,
+                    password=RedditConfig.PASSWORD
+                )
+                # Test authenticated connection
+                self.reddit.user.me()
+                self.logger.info("Reddit client initialized with authentication")
+            else:
+                # Read-only mode for public subreddits
+                self.reddit = praw.Reddit(
+                    client_id=RedditConfig.CLIENT_ID,
+                    client_secret=RedditConfig.CLIENT_SECRET,
+                    user_agent=RedditConfig.USER_AGENT
+                )
+                self.logger.info("Reddit client initialized in read-only mode")
         except Exception as e:
             self.logger.error(f"Failed to initialize Reddit client: {e}")
-            # Fallback to read-only mode
-            self.reddit = praw.Reddit(
-                client_id=RedditConfig.CLIENT_ID,
-                client_secret=RedditConfig.CLIENT_SECRET,
-                user_agent=RedditConfig.USER_AGENT
-            )
+            raise
     
     def get_subreddit_category(self, subreddit_name: str) -> str:
         """Determine category for a subreddit"""
@@ -169,21 +174,27 @@ class AsyncRedditClient:
     async def _setup_client(self):
         """Initialize async Reddit client"""
         try:
-            self.reddit = asyncpraw.Reddit(
-                client_id=RedditConfig.CLIENT_ID,
-                client_secret=RedditConfig.CLIENT_SECRET,
-                user_agent=RedditConfig.USER_AGENT,
-                username=RedditConfig.USERNAME,
-                password=RedditConfig.PASSWORD
-            )
-            self.logger.info("Async Reddit client initialized successfully")
+            # Use read-only mode if no username/password provided
+            if RedditConfig.USERNAME and RedditConfig.PASSWORD:
+                self.reddit = asyncpraw.Reddit(
+                    client_id=RedditConfig.CLIENT_ID,
+                    client_secret=RedditConfig.CLIENT_SECRET,
+                    user_agent=RedditConfig.USER_AGENT,
+                    username=RedditConfig.USERNAME,
+                    password=RedditConfig.PASSWORD
+                )
+                self.logger.info("Async Reddit client initialized with authentication")
+            else:
+                # Read-only mode for public subreddits
+                self.reddit = asyncpraw.Reddit(
+                    client_id=RedditConfig.CLIENT_ID,
+                    client_secret=RedditConfig.CLIENT_SECRET,
+                    user_agent=RedditConfig.USER_AGENT
+                )
+                self.logger.info("Async Reddit client initialized in read-only mode")
         except Exception as e:
             self.logger.error(f"Failed to initialize async Reddit client: {e}")
-            self.reddit = asyncpraw.Reddit(
-                client_id=RedditConfig.CLIENT_ID,
-                client_secret=RedditConfig.CLIENT_SECRET,
-                user_agent=RedditConfig.USER_AGENT
-            )
+            raise
     
     def get_subreddit_category(self, subreddit_name: str) -> str:
         """Determine category for a subreddit"""
@@ -243,6 +254,23 @@ class AsyncRedditClient:
             return posts
         except Exception as e:
             self.logger.error(f"Error fetching new posts from r/{subreddit_name}: {e}")
+            return []
+    
+    async def get_rising_posts(self, subreddit_name: str, limit: int = 25) -> List[RedditPost]:
+        """Get rising posts from a subreddit"""
+        try:
+            subreddit = await self.reddit.subreddit(subreddit_name)
+            category = self.get_subreddit_category(subreddit_name)
+            posts = []
+            
+            async for post in subreddit.rising(limit=limit):
+                if not post.stickied:
+                    reddit_post = await self._post_to_dataclass(post, category)
+                    posts.append(reddit_post)
+            
+            return posts
+        except Exception as e:
+            self.logger.error(f"Error fetching rising posts from r/{subreddit_name}: {e}")
             return []
     
     async def monitor_subreddits(self, subreddit_names: List[str]) -> AsyncGenerator[List[RedditPost], None]:

@@ -1,0 +1,14 @@
+# GUI Requirements
+# For web app
+flask==2.3.2
+flask-cors==4.0.0
+
+# For both GUI apps
+praw==7.7.1
+asyncpraw==7.7.1
+python-dotenv==1.0.0
+aiofiles==23.1.0
+
+# Note: tkinter comes pre-installed with Python
+# To run the desktop GUI: python tkinter_app/reddit_monitor_gui.py
+# To run the web dashboard: python web_app/app.py

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Data Engine - Live Financial Data Monitoring</title>
+    <meta name="description" content="Real-time Reddit monitoring for stock market insights. Track trending tickers, sentiment analysis, and financial discussions across multiple subreddits.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reddit Data Engine - Live Financial Data Monitoring">
+    <meta property="og:description" content="Monitor Reddit for stock market insights in real-time. Track trending tickers and sentiment analysis.">
+    <meta property="og:url" content="https://yourusername.github.io/reddit-data/">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/demo-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🚀 Reddit Data Engine</h1>
+                <p class="hero-subtitle">Real-time Reddit monitoring for stock market insights</p>
+                <p class="hero-description">
+                    Track trending tickers, analyze sentiment, and monitor financial discussions 
+                    across multiple subreddits in real-time.
+                </p>
+                
+                <!-- Sponsorship Badges -->
+                <div class="sponsor-badges">
+                    <a href="https://github.com/sponsors/yourusername" class="sponsor-btn github-sponsor">
+                        ❤️ Sponsor on GitHub
+                    </a>
+                    <a href="https://www.paypal.me/yourusername" class="sponsor-btn paypal-sponsor">
+                        💰 PayPal Donation
+                    </a>
+                    <a href="https://ko-fi.com/yourusername" class="sponsor-btn kofi-sponsor">
+                        ☕ Buy me a coffee
+                    </a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="cta-buttons">
+                    <a href="#demo" class="btn btn-primary btn-large">
+                        👀 View Live Demo
+                    </a>
+                    <a href="https://github.com/yourusername/reddit-data" class="btn btn-secondary btn-large">
+                        📥 Download & Install
+                    </a>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Subreddits Monitored</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">1000+</div>
+                        <div class="stat-label">Posts/Hour</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Real-time</div>
+                        <div class="stat-label">Updates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2>📊 Live Dashboard Demo</h2>
+            <p class="section-subtitle">Experience the interface with real sample data</p>
+
+            <!-- Demo Notice -->
+            <div class="demo-notice">
+                <h4>🎮 Interactive Demo</h4>
+                <p>This is a static demonstration with sample data. 
+                   <strong>Download the full version</strong> to connect to Reddit's API for live monitoring.</p>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-title">Total Posts</div>
+                    <div class="stat-value" id="totalPosts">847</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Active Subreddits</div>
+                    <div class="stat-value" id="activeSubreddits">6</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Trending Tickers</div>
+                    <div class="stat-value" id="trendingTickers">23</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Market Sentiment</div>
+                    <div class="stat-value sentiment-positive" id="marketSentiment">Bullish</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('monitor')">📊 Live Monitor</button>
+                <button class="tab-button" onclick="showTab('tickers')">💹 Tickers</button>
+                <button class="tab-button" onclick="showTab('insights')">💡 Insights</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Monitor Tab -->
+                <div id="monitor-tab" class="tab-panel active">
+                    <div class="monitor-grid">
+                        <!-- Live Feed -->
+                        <div class="live-feed">
+                            <h3>Live Reddit Feed</h3>
+                            <div id="postsContainer" class="posts-container">
+                                <!-- Sample posts will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Charts -->
+                        <div class="charts-panel">
+                            <h3>Activity Chart</h3>
+                            <canvas id="activityChart"></canvas>
+                            
+                            <h3 style="margin-top: 20px;">Top Tickers</h3>
+                            <canvas id="tickersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tickers Tab -->
+                <div id="tickers-tab" class="tab-panel">
+                    <h3>Trending Stock Tickers</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Mentions</th>
+                                <th>Sentiment</th>
+                                <th>Subreddits</th>
+                                <th>24h Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tickersTableBody">
+                            <!-- Sample ticker data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Insights Tab -->
+                <div id="insights-tab" class="tab-panel">
+                    <h3>AI-Powered Market Insights</h3>
+                    <div class="insights-content" id="insightsContent">
+                        <h4>📈 Current Market Analysis</h4>
+                        <p><strong>Top Trending:</strong> $AAPL shows strong bullish sentiment with 156 mentions across WSB and stocks subreddits.</p>
+                        <p><strong>Risk Alert:</strong> High volatility detected in $TSLA discussions. 67% of posts mention earnings uncertainty.</p>
+                        <p><strong>Opportunity:</strong> $AMD gaining traction in tech-focused communities. Positive sentiment up 23% in last 4 hours.</p>
+                        
+                        <h4>🎯 Trading Signals</h4>
+                        <ul>
+                            <li>✅ <strong>$NVDA</strong> - Strong buy signals from r/investing community</li>
+                            <li>⚠️ <strong>$GME</strong> - Mixed sentiment, high volatility expected</li>
+                            <li>📈 <strong>$MSFT</strong> - Steady positive mentions, low risk opportunity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2>⚡ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Real-time Monitoring</h3>
+                    <p>Live tracking of Reddit posts across multiple financial subreddits with automatic updates every 30 seconds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💹</div>
+                    <h3>Ticker Extraction</h3>
+                    <p>Automatically identifies and tracks stock ticker mentions ($AAPL, $TSLA) with sentiment analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Clickable URLs</h3>
+                    <p>One-click access to original Reddit posts and ticker search for deeper research and verification.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Dual Interface</h3>
+                    <p>Choose between desktop GUI (Tkinter) or web dashboard (Flask) based on your workflow preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Data Export</h3>
+                    <p>Export monitoring data to JSON format for further analysis, backtesting, or integration with trading systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Easy Configuration</h3>
+                    <p>Simple setup with Reddit API credentials and customizable monitoring parameters for any workflow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="install-section">
+        <div class="container">
+            <h2>🚀 Quick Installation</h2>
+            <div class="install-grid">
+                <div class="install-step">
+                    <h3>1. Clone Repository</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash">git clone https://github.com/yourusername/reddit-data.git
+cd reddit-data</code></pre>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <h3>2. Install Dependencies</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash">pip install -r requirements.txt</code></pre>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <h3>3. Setup Reddit API</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash">python setup_reddit_api.py</code></pre>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <h3>4. Launch Interface</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Desktop GUI
+python gui/tkinter_app/reddit_monitor_gui.py
+
+# Web Dashboard  
+python gui/web_app/app.py</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="database-config">
+                <h3>🔧 Database Configuration (Optional)</h3>
+                <p>For advanced users who want persistent data storage:</p>
+                <div class="code-block">
+                    <pre><code class="language-python"># config/database.json (create this file)
+{
+    "database": {
+        "type": "postgresql",  // or "sqlite", "mysql"
+        "host": "localhost",
+        "port": 5432,
+        "name": "reddit_data",
+        "user": "your_username",
+        "password": "your_password"
+    },
+    "storage": {
+        "enable_persistence": true,
+        "retention_days": 30,
+        "export_format": "json"  // or "csv", "parquet"
+    }
+}</code></pre>
+                </div>
+                <p><em>Note: The application works perfectly with in-memory storage. Database configuration is only needed for long-term data retention.</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots-section">
+        <div class="container">
+            <h2>📸 Interface Screenshots</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <h3>Desktop GUI Interface</h3>
+                    <div class="screenshot-placeholder">
+                        <div class="placeholder-content">
+                            <h4>🖥️ Tkinter Desktop App</h4>
+                            <p>• Native desktop experience</p>
+                            <p>• Multi-tab interface</p>
+                            <p>• Double-click URL opening</p>
+                            <p>• Real-time status updates</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-item">
+                    <h3>Web Dashboard</h3>
+                    <div class="screenshot-placeholder">
+                        <div class="placeholder-content">
+                            <h4>🌐 Flask Web Interface</h4>
+                            <p>• Responsive design</p>
+                            <p>• Interactive charts</p>
+                            <p>• Clickable post links</p>
+                            <p>• Modern dark theme</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases-section">
+        <div class="container">
+            <h2>💼 Perfect For</h2>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <h3>🎯 Day Traders</h3>
+                    <p>Monitor social sentiment for quick trading decisions and identify trending stocks before they explode.</p>
+                </div>
+                <div class="use-case">
+                    <h3>📈 Analysts</h3>
+                    <p>Collect social media data for sentiment analysis, research reports, and market trend identification.</p>
+                </div>
+                <div class="use-case">
+                    <h3>🤖 Algo Developers</h3>
+                    <p>Export data feeds for quantitative analysis, backtesting, and automated trading system development.</p>
+                </div>
+                <div class="use-case">
+                    <h3>📊 Researchers</h3>
+                    <p>Study retail investor behavior, social trading patterns, and market psychology through Reddit data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <h2>💖 Support the Project</h2>
+            <div class="support-content">
+                <div class="support-text">
+                    <h3>Help Keep This Project Free & Open Source</h3>
+                    <p>Reddit Data Engine is completely free to use, but development takes time and effort. 
+                       Your sponsorship helps us add new features, maintain compatibility, and provide support.</p>
+                    
+                    <h4>🎁 Sponsor Benefits</h4>
+                    <ul>
+                        <li>Priority feature requests and bug fixes</li>
+                        <li>Direct email support and consultation</li>
+                        <li>Early access to premium features</li>
+                        <li>Custom integration assistance</li>
+                    </ul>
+                </div>
+                
+                <div class="sponsor-tiers">
+                    <div class="tier">
+                        <h4>☕ Coffee Tier ($5/mo)</h4>
+                        <p>Keep the developer caffeinated</p>
+                    </div>
+                    <div class="tier">
+                        <h4>🥉 Bronze Tier ($25/mo)</h4>
+                        <p>Email support + feature requests</p>
+                    </div>
+                    <div class="tier">
+                        <h4>🥈 Silver Tier ($100/mo)</h4>
+                        <p>Priority support + custom features</p>
+                    </div>
+                    <div class="tier featured">
+                        <h4>🥇 Gold Tier ($500/mo)</h4>
+                        <p>Direct consultation + integration help</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername/reddit-data">GitHub</a>
+                    <a href="https://github.com/yourusername/reddit-data/issues">Report Bug</a>
+                    <a href="https://github.com/yourusername/reddit-data/discussions">Discussions</a>
+                    <a href="https://github.com/yourusername/reddit-data/blob/main/CONTRIBUTING.md">Contributing</a>
+                </div>
+                <p>&copy; 2025 Reddit Data Engine. Open source under MIT License.</p>
+                <p>Last updated: <span id="lastUpdate">Just now</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/demo.js"></script>
+</body>
+</html>
