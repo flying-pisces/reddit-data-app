@@ -226,19 +226,21 @@ class LiveDataCollector:
             title_template = random.choice(sample_titles)
             title = title_template.format(ticker=ticker)
             
-            post_id = f"demo_{int(current_time)}_{i}"
+            # Generate realistic-looking Reddit post ID (Reddit uses base36 format)
+            post_id = f"{''.join(random.choices('0123456789abcdefghijklmnopqrstuvwxyz', k=7))}"
+            subreddit = random.choice(['wallstreetbets', 'stocks', 'investing'])
             
             post_data = {
                 'id': post_id,
                 'title': title,
                 'author': f'user_{random.randint(1000, 9999)}',
-                'subreddit': random.choice(['wallstreetbets', 'stocks', 'investing']),
+                'subreddit': subreddit,
                 'score': random.randint(50, 2500),
                 'num_comments': random.randint(20, 300),
                 'created_utc': current_time - random.randint(0, 3600 * 12),  # Up to 12 hours ago
-                'url': f"https://reddit.com/r/{random.choice(['wallstreetbets', 'stocks', 'investing'])}/comments/{post_id}/",
+                'url': f"https://reddit.com/r/{subreddit}/",  # Link to subreddit instead of non-existent post
                 'timestamp': datetime.now(timezone.utc).isoformat(),
-                'selftext': f"Demo analysis for {ticker}. This is fallback data generated when Reddit API is unavailable.",
+                'selftext': f"Demo analysis for {ticker}. This is fallback data - click to visit r/{subreddit}.",
                 'upvote_ratio': random.uniform(0.7, 0.95),
                 'over_18': False,
                 'stickied': False,
