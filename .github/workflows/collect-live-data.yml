@@ -1,0 +1,60 @@
+name: Collect Live Reddit Data
+
+on:
+  schedule:
+    # Run every hour at 5 minutes past the hour
+    - cron: '5 * * * *'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  collect-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Create .env file with Reddit credentials
+      env:
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+      run: |
+        echo "REDDIT_CLIENT_ID=$REDDIT_CLIENT_ID" > .env
+        echo "REDDIT_CLIENT_SECRET=$REDDIT_CLIENT_SECRET" >> .env
+        echo "REDDIT_USER_AGENT=$REDDIT_USER_AGENT" >> .env
+        
+    - name: Collect live Reddit data
+      run: |
+        python scripts/collect_live_data.py
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add docs/data/*.json
+        
+        # Only commit if there are changes
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🤖 Update live Reddit data - $(date -u '+%Y-%m-%d %H:%M UTC')
+          
+          📊 Automated data collection from:
+          - r/wallstreetbets
+          - r/stocks  
+          - r/investing
+          
+          🔄 Next update in 1 hour"
+          git push
+        fi
