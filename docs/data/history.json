@@ -190,5 +190,21 @@
     "top_ticker": "$TSLA",
     "top_subreddit": "stocks",
     "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-09-01T20:44:24.155479+00:00",
+    "total_posts": 24,
+    "total_tickers": 2,
+    "top_ticker": "MNDY",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-09-01T21:17:00.719133+00:00",
+    "total_posts": 24,
+    "total_tickers": 3,
+    "top_ticker": "MNDY",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
   }
 ]

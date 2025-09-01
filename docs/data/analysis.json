@@ -1,13 +1,12 @@
 {
   "overall_sentiment": "Bullish",
-  "sentiment_score": 529.2499999999999,
+  "sentiment_score": 60,
   "insights": [
-    "\ud83d\udd25 $SPY is trending with 20 mentions in the past hour",
-    "\ud83d\udcca 55 posts with 500+ upvotes indicate high market interest",
-    "\u26a1 High activity detected: 80 posts in the past hour",
-    "\ud83d\udcad Overall sentiment: Bullish based on 80 posts",
+    "\ud83d\udd25 MNDY is trending with 1 mentions",
+    "\ud83d\udcca 3 posts with 500+ upvotes indicate high market interest",
+    "\ud83d\udcad Overall sentiment: Bullish based on 24 posts",
     "\ud83d\udd58 US market hours - increased trading activity expected"
   ],
-  "high_activity_count": 55,
-  "analysis_timestamp": "2025-09-01T12:07:00.484938"
+  "high_activity_count": 3,
+  "analysis_timestamp": "2025-09-01T21:17:00.719256+00:00"
 }

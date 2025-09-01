@@ -11,6 +11,7 @@ import asyncio
 from datetime import datetime, timezone
 from pathlib import Path
 import logging
+import random
 
 # Add parent directory to path to import our modules
 sys.path.append(str(Path(__file__).parent.parent))
@@ -198,6 +199,58 @@ class LiveDataCollector:
         
         return analysis
     
+    def generate_fallback_data(self):
+        """Generate realistic fallback data when Reddit API fails"""
+        logger.info("🎭 Generating fallback demo data...")
+        
+        # Sample tickers and realistic post titles
+        sample_tickers = ['TSLA', 'AAPL', 'NVDA', 'GME', 'AMC', 'MSFT', 'GOOGL', 'META', 'AMZN', 'SPY']
+        sample_titles = [
+            "🚀 {ticker} to the moon! DD inside",
+            "{ticker} earnings beat expectations - bullish outlook",
+            "Why {ticker} is the play of the decade",
+            "Technical analysis: {ticker} breakout incoming",
+            "{ticker} short squeeze potential?",
+            "Bought 1000 shares of {ticker} - YOLO",
+            "{ticker} dip - perfect entry point?",
+            "Hold or sell {ticker}? Need advice",
+            "{ticker} news catalyst could spark rally",
+            "My {ticker} position is printing 💰",
+        ]
+        
+        posts = []
+        current_time = time.time()
+        
+        for i in range(25):  # Generate 25 sample posts
+            ticker = random.choice(sample_tickers)
+            title_template = random.choice(sample_titles)
+            title = title_template.format(ticker=ticker)
+            
+            post_id = f"demo_{int(current_time)}_{i}"
+            
+            post_data = {
+                'id': post_id,
+                'title': title,
+                'author': f'user_{random.randint(1000, 9999)}',
+                'subreddit': random.choice(['wallstreetbets', 'stocks', 'investing']),
+                'score': random.randint(50, 2500),
+                'num_comments': random.randint(20, 300),
+                'created_utc': current_time - random.randint(0, 3600 * 12),  # Up to 12 hours ago
+                'url': f"https://reddit.com/r/{random.choice(['wallstreetbets', 'stocks', 'investing'])}/comments/{post_id}/",
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'selftext': f"Demo analysis for {ticker}. This is fallback data generated when Reddit API is unavailable.",
+                'upvote_ratio': random.uniform(0.7, 0.95),
+                'over_18': False,
+                'stickied': False,
+                'comments': random.randint(20, 300)
+            }
+            posts.append(post_data)
+        
+        # Sort by score
+        posts.sort(key=lambda p: p['score'], reverse=True)
+        logger.info(f"✅ Generated {len(posts)} fallback posts")
+        return posts
+
     def generate_history(self, stats):
         """Generate/update history data"""
         history_file = self.output_dir / 'history.json'
@@ -243,14 +296,19 @@ class LiveDataCollector:
             posts = self.collect_posts()
             
             if not posts:
-                logger.error("❌ No posts collected - using fallback data")
-                return False
+                logger.warning("⚠️ No posts collected from Reddit API - generating fallback data")
+                posts = self.generate_fallback_data()
             
             # Process data
             tickers = self.extract_tickers(posts)
             stats = self.generate_stats(posts, tickers)
             analysis = self.generate_analysis(posts, tickers)
             history = self.generate_history(stats)
+            
+            # Update metadata to indicate data source
+            if 'demo_' in posts[0]['id'] if posts else False:
+                stats['metadata']['data_source'] = 'Fallback Demo Data (Reddit API unavailable)'
+                stats['metadata']['note'] = 'This dashboard is using demo data because Reddit API credentials need to be configured'
             
             # Update history with analysis data
             if history and tickers:

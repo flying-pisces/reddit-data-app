@@ -1,20 +1,5 @@
 {
-  "$TSLA": 13,
-  "$AAPL": 9,
-  "$META": 5,
-  "$PYPL": 8,
-  "$NVDA": 8,
-  "$NFLX": 6,
-  "$GOOGL": 7,
-  "$INTC": 7,
-  "$AMZN": 4,
-  "$MSFT": 5,
-  "$GME": 2,
-  "$AMD": 4,
-  "$CRM": 2,
-  "$SPY": 20,
-  "$QQQ": 9,
-  "$IWM": 6,
-  "$VTI": 6,
-  "$ARKK": 7
+  "MNDY": 1,
+  "MSOS": 1,
+  "NSRGY": 1
 }
