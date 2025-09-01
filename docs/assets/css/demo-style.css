@@ -889,3 +889,48 @@ footer {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* GitHub Data Specific Styles */
+.post-live-badge {
+    background-color: var(--success);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-connecting {
+    color: var(--warning);
+}
+
+.status-connected {
+    color: var(--success);
+}
+
+.status-demo {
+    color: var(--accent);
+}
+
+.status-error {
+    color: var(--danger);
+}
+
+.github-toast {
+    border-left: 4px solid var(--success);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toast-icon {
+    font-size: 16px;
+}
+
+.toast-message {
+    font-size: 14px;
+}

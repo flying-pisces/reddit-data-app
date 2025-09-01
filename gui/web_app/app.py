@@ -23,8 +23,7 @@ from data_processor import DataProcessor
 from api_interface import AnalysisAPI
 
 app = Flask(__name__)
-# Allow CORS for GitHub Pages domain
-CORS(app, origins=["https://flying-pisces.github.io", "http://localhost:3000", "http://localhost:8000"])
+CORS(app)
 
 # Global data storage
 monitor_data = {
@@ -272,7 +271,4 @@ def monitor_reddit_background():
             time.sleep(10)
 
 if __name__ == '__main__':
-    # For production (Render), use PORT from environment
-    port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_ENV') != 'production'
-    app.run(host='0.0.0.0', port=port, debug=debug)
+    app.run(debug=True, port=5000)
