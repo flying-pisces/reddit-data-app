@@ -519,6 +519,10 @@ function initializeEnhancedCharts() {
     }
 }
 
+// Global chart instances to prevent recreation
+let activityChartInstance = null;
+let tickersChartInstance = null;
+
 function initializeActivityChart() {
     const ctx = document.getElementById('activityChart');
     if (!ctx) {
@@ -526,15 +530,20 @@ function initializeActivityChart() {
         return;
     }
     
+    // Destroy existing chart if it exists
+    if (activityChartInstance) {
+        activityChartInstance.destroy();
+    }
+    
     // Use real data if available, otherwise generate realistic sample data
-    const historyData = dataCache.history || generateSampleHistory();
+    const historyData = dataCache.history || generateExtendedSampleHistory();
     
     const labels = [];
     const postCounts = [];
     
-    // Generate last 12 hours of data
+    // Generate last 24 hours of data (longer timespan to avoid blanks)
     const now = new Date();
-    for (let i = 11; i >= 0; i--) {
+    for (let i = 23; i >= 0; i--) {
         const hour = new Date(now.getTime() - i * 60 * 60 * 1000);
         labels.push(hour.getHours().toString().padStart(2, '0') + ':00');
         
@@ -544,20 +553,24 @@ function initializeActivityChart() {
         } else {
             // Generate realistic activity pattern (higher during US trading hours)
             const hourNum = hour.getHours();
-            let baseActivity = 20;
-            if (hourNum >= 9 && hourNum <= 16) baseActivity = 80; // Trading hours
-            if (hourNum >= 18 && hourNum <= 23) baseActivity = 50; // Evening activity
-            postCounts.push(baseActivity + Math.floor(Math.random() * 40));
+            let baseActivity = 15;
+            if (hourNum >= 9 && hourNum <= 16) baseActivity = 70; // Trading hours
+            if (hourNum >= 18 && hourNum <= 23) baseActivity = 45; // Evening activity
+            if (hourNum >= 0 && hourNum <= 6) baseActivity = 8;   // Late night/early morning
+            postCounts.push(baseActivity + Math.floor(Math.random() * 25));
         }
     }
     
-    new Chart(ctx, {
+    // Ensure we always have data - add fallback minimum values
+    const safePostCounts = postCounts.map(count => Math.max(count, 5));
+    
+    activityChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
             datasets: [{
                 label: 'Posts per Hour',
-                data: postCounts,
+                data: safePostCounts,
                 borderColor: '#58a6ff',
                 backgroundColor: 'rgba(88, 166, 255, 0.1)',
                 tension: 0.4,
@@ -565,7 +578,9 @@ function initializeActivityChart() {
                 pointBackgroundColor: '#58a6ff',
                 pointBorderColor: '#ffffff',
                 pointBorderWidth: 2,
-                pointRadius: 4
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                borderWidth: 2
             }]
         },
         options: {
@@ -573,6 +588,7 @@ function initializeActivityChart() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
+                    display: true,
                     labels: {
                         color: '#f0f6fc',
                         font: {
@@ -588,25 +604,39 @@ function initializeActivityChart() {
                     bodyColor: '#8b949e',
                     borderColor: '#30363d',
                     borderWidth: 1
+                },
+                // Add empty state plugin
+                emptyState: {
+                    enabled: true,
+                    message: 'Activity data loading...',
+                    color: '#8b949e'
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
+                    min: 0,
+                    max: Math.max(...safePostCounts) + 20,
                     ticks: {
                         color: '#8b949e',
                         font: {
                             size: 11
-                        }
+                        },
+                        stepSize: 20
                     },
                     grid: {
-                        color: '#30363d',
-                        drawBorder: false
+                        color: 'rgba(48, 54, 61, 0.8)',
+                        drawBorder: false,
+                        lineWidth: 1
                     },
                     title: {
                         display: true,
-                        text: 'Posts',
-                        color: '#8b949e'
+                        text: 'Posts per Hour',
+                        color: '#8b949e',
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        }
                     }
                 },
                 x: {
@@ -614,25 +644,37 @@ function initializeActivityChart() {
                         color: '#8b949e',
                         font: {
                             size: 11
-                        }
+                        },
+                        maxTicksLimit: 12
                     },
                     grid: {
-                        color: '#30363d',
+                        color: 'rgba(48, 54, 61, 0.5)',
                         drawBorder: false
                     },
                     title: {
                         display: true,
-                        text: 'Hour',
-                        color: '#8b949e'
+                        text: 'Time (24 Hour Period)',
+                        color: '#8b949e',
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        }
                     }
                 }
             },
             interaction: {
                 intersect: false,
                 mode: 'index'
+            },
+            // Prevent animation flickering
+            animation: {
+                duration: 750,
+                easing: 'easeInOutQuart'
             }
         }
     });
+    
+    console.log('📈 Activity chart initialized with', safePostCounts.length, 'data points');
 }
 
 function initializeTickersChart() {
@@ -640,6 +682,11 @@ function initializeTickersChart() {
     if (!ctx) {
         console.warn('Tickers chart canvas not found');
         return;
+    }
+    
+    // Destroy existing chart if it exists
+    if (tickersChartInstance) {
+        tickersChartInstance.destroy();
     }
     
     // Use real data if available
@@ -651,13 +698,14 @@ function initializeTickersChart() {
         .sort(([,a], [,b]) => b - a)
         .slice(0, 6);
     
-    const labels = topTickers.map(([ticker]) => ticker);
-    const data = topTickers.map(([, count]) => count);
+    // Ensure we always have data
+    const labels = topTickers.length > 0 ? topTickers.map(([ticker]) => ticker) : ['$SPY', '$QQQ', '$AAPL'];
+    const data = topTickers.length > 0 ? topTickers.map(([, count]) => count) : [100, 75, 50];
     const colors = [
         '#58a6ff', '#3fb950', '#d29922', '#f85149', '#a5a5a5', '#7c3aed'
     ];
     
-    new Chart(ctx, {
+    tickersChartInstance = new Chart(ctx, {
         type: 'doughnut',
         data: {
             labels: labels,
@@ -699,9 +747,16 @@ function initializeTickersChart() {
                         }
                     }
                 }
+            },
+            // Prevent animation flickering
+            animation: {
+                duration: 500,
+                easing: 'easeInOutQuart'
             }
         }
     });
+    
+    console.log('💹 Tickers chart initialized with', labels.length, 'tickers');
 }
 
 function generateSampleHistory() {
@@ -722,6 +777,48 @@ function generateSampleHistory() {
             total_posts: baseActivity + Math.floor(Math.random() * 30),
             total_tickers: Math.floor(Math.random() * 10) + 15,
             top_ticker: ['$GME', '$AAPL', '$TSLA', '$NVDA'][Math.floor(Math.random() * 4)],
+            sentiment: ['Bullish', 'Neutral', 'Bearish'][Math.floor(Math.random() * 3)]
+        });
+    }
+    
+    return history;
+}
+
+function generateExtendedSampleHistory() {
+    const history = [];
+    const now = new Date();
+    
+    // Generate 48 hours of data for more stability
+    for (let i = 47; i >= 0; i--) {
+        const timestamp = new Date(now.getTime() - i * 60 * 60 * 1000);
+        const hour = timestamp.getHours();
+        const dayOfWeek = timestamp.getDay(); // 0 = Sunday, 6 = Saturday
+        
+        // Generate realistic activity pattern with weekend adjustments
+        let baseActivity = 15;
+        
+        // Weekday patterns
+        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+            if (hour >= 9 && hour <= 16) baseActivity = 80; // Trading hours
+            if (hour >= 6 && hour <= 9) baseActivity = 40;  // Pre-market
+            if (hour >= 16 && hour <= 20) baseActivity = 60; // After-market
+            if (hour >= 20 && hour <= 23) baseActivity = 35; // Evening
+            if (hour >= 0 && hour <= 6) baseActivity = 8;    // Late night
+        } else {
+            // Weekend patterns - lower overall activity
+            baseActivity = Math.floor(baseActivity * 0.6);
+            if (hour >= 10 && hour <= 18) baseActivity = 25; // Weekend day activity
+        }
+        
+        // Add some random variation
+        const randomVariation = Math.floor(Math.random() * 20) - 10;
+        const finalActivity = Math.max(baseActivity + randomVariation, 3);
+        
+        history.push({
+            timestamp: timestamp.toISOString(),
+            total_posts: finalActivity,
+            total_tickers: Math.floor(Math.random() * 8) + 12,
+            top_ticker: ['$SPY', '$QQQ', '$AAPL', '$TSLA', '$NVDA', '$GME'][Math.floor(Math.random() * 6)],
             sentiment: ['Bullish', 'Neutral', 'Bearish'][Math.floor(Math.random() * 3)]
         });
     }
