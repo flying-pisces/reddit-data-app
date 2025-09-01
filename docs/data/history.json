@@ -1,24 +1,192 @@
 [
   {
-    "timestamp": "2025-01-01T12:00:00Z",
-    "total_posts": 165,
-    "total_tickers": 20,
+    "timestamp": "2025-08-31T13:07:00.484940",
+    "total_posts": 81,
+    "total_tickers": 21,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-08-31T14:07:00.484940",
+    "total_posts": 106,
+    "total_tickers": 22,
+    "top_ticker": "$MSFT",
+    "top_subreddit": "stocks",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-08-31T15:07:00.484940",
+    "total_posts": 114,
+    "total_tickers": 28,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "investing",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-08-31T16:07:00.484940",
+    "total_posts": 88,
+    "total_tickers": 28,
+    "top_ticker": "$GME",
+    "top_subreddit": "investing",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-08-31T17:07:00.484940",
+    "total_posts": 37,
+    "total_tickers": 13,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-08-31T18:07:00.484940",
+    "total_posts": 53,
+    "total_tickers": 23,
+    "top_ticker": "$GME",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-08-31T19:07:00.484940",
+    "total_posts": 49,
+    "total_tickers": 18,
+    "top_ticker": "$TSLA",
+    "top_subreddit": "investing",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-08-31T20:07:00.484940",
+    "total_posts": 44,
+    "total_tickers": 23,
+    "top_ticker": "$GME",
+    "top_subreddit": "stocks",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-08-31T21:07:00.484940",
+    "total_posts": 69,
+    "total_tickers": 24,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "stocks",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-08-31T22:07:00.484940",
+    "total_posts": 72,
+    "total_tickers": 15,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "investing",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-08-31T23:07:00.484940",
+    "total_posts": 68,
+    "total_tickers": 21,
+    "top_ticker": "$MSFT",
+    "top_subreddit": "stocks",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-09-01T00:07:00.484940",
+    "total_posts": 36,
+    "total_tickers": 15,
+    "top_ticker": "$GME",
+    "top_subreddit": "stocks",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-09-01T01:07:00.484940",
+    "total_posts": 16,
+    "total_tickers": 18,
+    "top_ticker": "$AAPL",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-09-01T02:07:00.484940",
+    "total_posts": 18,
+    "total_tickers": 9,
     "top_ticker": "$GME",
     "top_subreddit": "wallstreetbets",
     "sentiment": "Bullish"
   },
   {
-    "timestamp": "2025-01-01T11:00:00Z", 
-    "total_posts": 142,
-    "total_tickers": 18,
-    "top_ticker": "$AAPL",
-    "top_subreddit": "wallstreetbets", 
+    "timestamp": "2025-09-01T03:07:00.484940",
+    "total_posts": 18,
+    "total_tickers": 13,
+    "top_ticker": "$NVDA",
+    "top_subreddit": "stocks",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-09-01T04:07:00.484940",
+    "total_posts": 20,
+    "total_tickers": 16,
+    "top_ticker": "$GME",
+    "top_subreddit": "stocks",
+    "sentiment": "Neutral"
+  },
+  {
+    "timestamp": "2025-09-01T05:07:00.484940",
+    "total_posts": 16,
+    "total_tickers": 16,
+    "top_ticker": "$MSFT",
+    "top_subreddit": "investing",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-09-01T06:07:00.484940",
+    "total_posts": 38,
+    "total_tickers": 12,
+    "top_ticker": "$MSFT",
+    "top_subreddit": "investing",
     "sentiment": "Bullish"
   },
   {
-    "timestamp": "2025-01-01T10:00:00Z",
-    "total_posts": 128,
-    "total_tickers": 16,
+    "timestamp": "2025-09-01T07:07:00.484940",
+    "total_posts": 23,
+    "total_tickers": 14,
+    "top_ticker": "$GME",
+    "top_subreddit": "investing",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-09-01T08:07:00.484940",
+    "total_posts": 45,
+    "total_tickers": 18,
+    "top_ticker": "$GME",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bearish"
+  },
+  {
+    "timestamp": "2025-09-01T09:07:00.484940",
+    "total_posts": 87,
+    "total_tickers": 21,
+    "top_ticker": "$GME",
+    "top_subreddit": "stocks",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-09-01T10:07:00.484940",
+    "total_posts": 66,
+    "total_tickers": 23,
+    "top_ticker": "$TSLA",
+    "top_subreddit": "wallstreetbets",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-09-01T11:07:00.484940",
+    "total_posts": 120,
+    "total_tickers": 29,
+    "top_ticker": "$NVDA",
+    "top_subreddit": "investing",
+    "sentiment": "Bullish"
+  },
+  {
+    "timestamp": "2025-09-01T12:07:00.484940",
+    "total_posts": 115,
+    "total_tickers": 26,
     "top_ticker": "$TSLA",
     "top_subreddit": "stocks",
     "sentiment": "Neutral"

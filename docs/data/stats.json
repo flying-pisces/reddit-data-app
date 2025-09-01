@@ -1,20 +1,16 @@
 {
   "subreddit_stats": {
-    "wallstreetbets": 45,
-    "stocks": 32,
-    "investing": 28,
-    "options": 19,
-    "pennystocks": 15,
-    "StockMarket": 12,
-    "SecurityAnalysis": 8,
-    "ValueInvesting": 6
+    "wallstreetbets": 23,
+    "investing": 25,
+    "stocks": 32
   },
   "metadata": {
-    "last_updated": "2025-01-01T12:00:00Z",
-    "total_posts": 165,
-    "total_tickers": 20,
-    "subreddits_monitored": 8,
-    "data_source": "GitHub Actions (Sample Data)",
-    "update_frequency": "Hourly"
+    "last_updated": "2025-09-01T12:07:00.485021",
+    "total_posts": 80,
+    "total_tickers": 18,
+    "subreddits_monitored": 3,
+    "data_source": "Generated Sample Data (Realistic)",
+    "update_frequency": "Hourly",
+    "time_period": "Past 1 Hour"
   }
 }

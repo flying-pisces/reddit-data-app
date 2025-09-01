@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📊 GitHub Data System Initialized');
     initializeGitHubData();
     
+    // Initialize charts after a small delay to ensure DOM is ready
+    setTimeout(() => {
+        initializeEnhancedCharts();
+    }, 1000);
+    
     // Set up periodic refresh (every 5 minutes to check for new data)
     setInterval(checkForDataUpdates, 5 * 60 * 1000);
 });
@@ -496,9 +501,238 @@ function loadDemoData() {
     displayGitHubStats({ metadata: demoStats, subreddit_stats: {} });
 }
 
+// Enhanced chart initialization
+function initializeEnhancedCharts() {
+    console.log('📈 Initializing enhanced charts...');
+    try {
+        initializeActivityChart();
+        initializeTickersChart(); 
+        console.log('✅ Charts initialized successfully');
+    } catch (error) {
+        console.warn('⚠️ Chart initialization failed:', error);
+        // Fallback to basic charts
+        setTimeout(() => {
+            if (typeof initializeCharts === 'function') {
+                initializeCharts();
+            }
+        }, 500);
+    }
+}
+
+function initializeActivityChart() {
+    const ctx = document.getElementById('activityChart');
+    if (!ctx) {
+        console.warn('Activity chart canvas not found');
+        return;
+    }
+    
+    // Use real data if available, otherwise generate realistic sample data
+    const historyData = dataCache.history || generateSampleHistory();
+    
+    const labels = [];
+    const postCounts = [];
+    
+    // Generate last 12 hours of data
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+        const hour = new Date(now.getTime() - i * 60 * 60 * 1000);
+        labels.push(hour.getHours().toString().padStart(2, '0') + ':00');
+        
+        // Use real data or generate realistic sample
+        if (historyData && historyData.length > i) {
+            postCounts.push(historyData[historyData.length - 1 - i]?.total_posts || 0);
+        } else {
+            // Generate realistic activity pattern (higher during US trading hours)
+            const hourNum = hour.getHours();
+            let baseActivity = 20;
+            if (hourNum >= 9 && hourNum <= 16) baseActivity = 80; // Trading hours
+            if (hourNum >= 18 && hourNum <= 23) baseActivity = 50; // Evening activity
+            postCounts.push(baseActivity + Math.floor(Math.random() * 40));
+        }
+    }
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Posts per Hour',
+                data: postCounts,
+                borderColor: '#58a6ff',
+                backgroundColor: 'rgba(88, 166, 255, 0.1)',
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#58a6ff',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#f0f6fc',
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(13, 17, 23, 0.9)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#8b949e',
+                    borderColor: '#30363d',
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#8b949e',
+                        font: {
+                            size: 11
+                        }
+                    },
+                    grid: {
+                        color: '#30363d',
+                        drawBorder: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Posts',
+                        color: '#8b949e'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#8b949e',
+                        font: {
+                            size: 11
+                        }
+                    },
+                    grid: {
+                        color: '#30363d',
+                        drawBorder: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Hour',
+                        color: '#8b949e'
+                    }
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+    });
+}
+
+function initializeTickersChart() {
+    const ctx = document.getElementById('tickersChart');
+    if (!ctx) {
+        console.warn('Tickers chart canvas not found');
+        return;
+    }
+    
+    // Use real data if available
+    const tickersData = dataCache.tickers || {
+        '$GME': 156, '$AAPL': 87, '$TSLA': 64, '$NVDA': 52, '$MSFT': 41, '$AMD': 38
+    };
+    
+    const topTickers = Object.entries(tickersData)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 6);
+    
+    const labels = topTickers.map(([ticker]) => ticker);
+    const data = topTickers.map(([, count]) => count);
+    const colors = [
+        '#58a6ff', '#3fb950', '#d29922', '#f85149', '#a5a5a5', '#7c3aed'
+    ];
+    
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors,
+                borderWidth: 2,
+                borderColor: '#21262d',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#f0f6fc'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#f0f6fc',
+                        usePointStyle: true,
+                        padding: 15,
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(13, 17, 23, 0.9)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#8b949e',
+                    borderColor: '#30363d',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.raw / total) * 100).toFixed(1);
+                            return `${context.label}: ${context.raw} mentions (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function generateSampleHistory() {
+    const history = [];
+    const now = new Date();
+    
+    for (let i = 23; i >= 0; i--) {
+        const timestamp = new Date(now.getTime() - i * 60 * 60 * 1000);
+        const hour = timestamp.getHours();
+        
+        // Generate realistic activity pattern
+        let baseActivity = 15;
+        if (hour >= 9 && hour <= 16) baseActivity = 60; // Trading hours
+        if (hour >= 18 && hour <= 23) baseActivity = 35; // Evening activity
+        
+        history.push({
+            timestamp: timestamp.toISOString(),
+            total_posts: baseActivity + Math.floor(Math.random() * 30),
+            total_tickers: Math.floor(Math.random() * 10) + 15,
+            top_ticker: ['$GME', '$AAPL', '$TSLA', '$NVDA'][Math.floor(Math.random() * 4)],
+            sentiment: ['Bullish', 'Neutral', 'Bearish'][Math.floor(Math.random() * 3)]
+        });
+    }
+    
+    return history;
+}
+
 // Export for global access
 window.initializeGitHubData = initializeGitHubData;
 window.checkForDataUpdates = checkForDataUpdates;
 window.startMonitoring = startMonitoring;
 window.stopMonitoring = stopMonitoring;
 window.refreshData = refreshData;
+window.initializeEnhancedCharts = initializeEnhancedCharts;

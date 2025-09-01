@@ -297,6 +297,58 @@ body {
     font-size: 13px;
 }
 
+.integration-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.integration-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.integration-badge {
+    background-color: var(--success);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.integration-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-link {
+    padding: 6px 12px;
+    background-color: var(--bg-secondary);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border);
+}
+
+.action-link:hover {
+    background-color: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+}
+
 /* Stats Cards */
 .stats-row {
     display: grid;
@@ -729,6 +781,94 @@ body {
 .placeholder-content p {
     color: var(--text-secondary);
     margin-bottom: 8px;
+}
+
+.screenshot-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.screenshot-container:hover {
+    transform: translateY(-10px);
+}
+
+.screenshot-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.screenshot-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.6) 50%,
+        rgba(0,0,0,0.8) 100%
+    );
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.screenshot-container:hover .screenshot-overlay {
+    opacity: 1;
+}
+
+.screenshot-features {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.screenshot-features h4 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.screenshot-features p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.screenshot-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.screenshot-link:hover {
+    background-color: var(--accent-hover);
+}
+
+.desktop-launch {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--bg-primary);
+    border-radius: 6px;
+    border-left: 4px solid var(--accent);
+}
+
+.desktop-launch code {
+    color: var(--accent);
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+    font-size: 13px;
 }
 
 /* Use Cases Section */

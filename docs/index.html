@@ -75,8 +75,8 @@
     <!-- Live Demo Section -->
     <section id="demo" class="demo-section">
         <div class="container">
-            <h2>📊 Live Dashboard Demo</h2>
-            <p class="section-subtitle">Experience the interface with real sample data</p>
+            <h2>📊 Reddit Data Engine - Live Dashboard</h2>
+            <p class="section-subtitle">Real-time monitoring powered by GitHub Actions</p>
 
             <!-- Demo Notice -->
             <div class="demo-notice">
@@ -94,8 +94,17 @@
                         <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh</button>
                     </div>
                 </div>
-                <p><strong>GitHub Actions Integration:</strong> Data automatically updates every hour via scheduled workflows.
-                   <strong><a href="https://github.com/flying-pisces/reddit-data/actions" target="_blank">View automation logs →</a></strong></p>
+                <div class="integration-info">
+                    <div class="integration-status">
+                        <span class="integration-badge">🤖 Automated</span>
+                        <span>Updates every hour via GitHub Actions</span>
+                    </div>
+                    <div class="integration-links">
+                        <a href="https://github.com/flying-pisces/reddit-data/actions" target="_blank" class="action-link">📊 View Logs</a>
+                        <a href="https://github.com/flying-pisces/reddit-data" target="_blank" class="action-link">📁 Source Code</a>
+                        <a href="#installation" class="action-link">⬇️ Install Local</a>
+                    </div>
+                </div>
             </div>
 
             <!-- Stats Cards Row -->
@@ -296,26 +305,33 @@ python gui/web_app/app.py</code></pre>
             <h2>📸 Interface Screenshots</h2>
             <div class="screenshot-grid">
                 <div class="screenshot-item">
-                    <h3>Desktop GUI Interface</h3>
-                    <div class="screenshot-placeholder">
-                        <div class="placeholder-content">
-                            <h4>🖥️ Tkinter Desktop App</h4>
-                            <p>• Native desktop experience</p>
-                            <p>• Multi-tab interface</p>
-                            <p>• Double-click URL opening</p>
-                            <p>• Real-time status updates</p>
+                    <h3>🌐 Web Dashboard (Flask)</h3>
+                    <div class="screenshot-container">
+                        <img src="assets/images/web-dashboard-screenshot.png" alt="Web Dashboard Screenshot" class="screenshot-img">
+                        <div class="screenshot-overlay">
+                            <div class="screenshot-features">
+                                <h4>Live Web Interface</h4>
+                                <p>• Real-time Reddit feed monitoring</p>
+                                <p>• Interactive charts and analytics</p>
+                                <p>• Clickable post titles and ticker links</p>
+                                <p>• Responsive design for all devices</p>
+                                <a href="http://localhost:5000" class="screenshot-link" target="_blank">🔗 Launch Web Dashboard</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <h3>Web Dashboard</h3>
+                    <h3>🖥️ Desktop GUI (Tkinter)</h3>
                     <div class="screenshot-placeholder">
                         <div class="placeholder-content">
-                            <h4>🌐 Flask Web Interface</h4>
-                            <p>• Responsive design</p>
-                            <p>• Interactive charts</p>
-                            <p>• Clickable post links</p>
-                            <p>• Modern dark theme</p>
+                            <h4>Native Desktop Application</h4>
+                            <p>• Multi-tab interface (Monitor, Tickers, Insights)</p>
+                            <p>• Double-click posts to open in browser</p>
+                            <p>• Export data with customizable formats</p>
+                            <p>• Real-time connection status indicators</p>
+                            <div class="desktop-launch">
+                                <code>python gui/tkinter_app/reddit_monitor_gui.py</code>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,13 +1,13 @@
 {
   "overall_sentiment": "Bullish",
-  "sentiment_score": 847,
+  "sentiment_score": 529.2499999999999,
   "insights": [
-    "🔥 $GME is trending with 156 mentions across WSB and pennystocks",
-    "📊 5 posts with 1000+ upvotes indicate high market interest",
-    "💭 Overall sentiment: Bullish based on 23 analyzed posts",
-    "⚡ Tech sector showing strong momentum with AAPL, TSLA, NVDA leading discussions",
-    "📈 Earnings season driving increased activity across financial subreddits"
+    "\ud83d\udd25 $SPY is trending with 20 mentions in the past hour",
+    "\ud83d\udcca 55 posts with 500+ upvotes indicate high market interest",
+    "\u26a1 High activity detected: 80 posts in the past hour",
+    "\ud83d\udcad Overall sentiment: Bullish based on 80 posts",
+    "\ud83d\udd58 US market hours - increased trading activity expected"
   ],
-  "high_activity_count": 5,
-  "analysis_timestamp": "2025-01-01T12:00:00Z"
+  "high_activity_count": 55,
+  "analysis_timestamp": "2025-09-01T12:07:00.484938"
 }
