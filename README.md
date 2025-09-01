@@ -49,7 +49,7 @@ $ python main.py monitor
 <td width="50%">
 
 ### 🔥 **Real-time Monitoring**  
-- **🌐 [LIVE DEMO](https://yourusername.github.io/reddit-data/)** - Try it now, no installation!
+- **🌐 [LIVE DEMO](https://flying-pisces.github.io/reddit-data/)** - Try it now, no installation!
 - Monitors **13+ investment subreddits** simultaneously
 - **Async architecture** with 1000+ posts/hour throughput
 - **Live updates** every 30 seconds
