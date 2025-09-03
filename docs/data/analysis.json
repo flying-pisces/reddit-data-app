@@ -1,12 +1,10 @@
 {
   "overall_sentiment": "Bullish",
-  "sentiment_score": 50,
+  "sentiment_score": 70,
   "insights": [
-    "\ud83d\udd25 MNDY is trending with 1 mentions",
-    "\ud83d\udcca 4 posts with 500+ upvotes indicate high market interest",
-    "\ud83d\udcad Overall sentiment: Bullish based on 24 posts",
-    "\ud83d\udd58 US market hours - increased trading activity expected"
+    "\ud83d\udcca 20 posts with 500+ upvotes indicate high market interest",
+    "\ud83d\udcad Overall sentiment: Bullish based on 25 posts"
   ],
-  "high_activity_count": 4,
-  "analysis_timestamp": "2025-09-01T21:37:03.026274+00:00"
+  "high_activity_count": 20,
+  "analysis_timestamp": "2025-09-03T08:33:01.792059+00:00"
 }
