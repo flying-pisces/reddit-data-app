@@ -27,12 +27,17 @@ const OnboardingCard = styled(motion.div)`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 40px;
+  padding: 30px;
   width: 100%;
   max-width: 600px;
+  height: 90vh;
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
   text-align: center;
+  overflow: hidden;
 `;
 
 const ProgressBar = styled.div`
@@ -51,11 +56,13 @@ const Progress = styled(motion.div)`
 `;
 
 const StepContent = styled(motion.div)`
-  min-height: 400px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  overflow-y: auto;
 `;
 
 const StepTitle = styled.h2`
@@ -127,6 +134,8 @@ const ButtonContainer = styled.div`
   width: 100%;
   max-width: 400px;
   margin-top: auto;
+  padding-top: 20px;
+  flex-shrink: 0;
 `;
 
 const Button = styled(motion.button)`
