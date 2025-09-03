@@ -1,0 +1,49 @@
+{
+  "app_name": "Reddit Insight",
+  "version": "1.0.0",
+  "
+": {
+    "FREE": {
+      "daily_limit": 20,
+      "features": ["Basic insights", "3 categories", "Daily limit"]
+    },
+    "PRO": {
+      "price": 4.99,
+      "product_id": "reddit_insight_pro_monthly",
+      "daily_limit": -1,
+      "features": ["Unlimited insights", "All categories", "Priority updates", "No ads"]
+    },
+    "PREMIUM": {
+      "price": 9.99,
+      "product_id": "reddit_insight_premium_monthly", 
+      "daily_limit": -1,
+      "features": ["Everything in Pro", "AI predictions", "Portfolio tracking", "API access", "Custom alerts"]
+    }
+  },
+  "api_keys": {
+    "revenuecat_api_key": "your_revenuecat_key_here"
+  },
+  "reddit": {
+    "subreddits": [
+      "wallstreetbets",
+      "stocks", 
+      "investing",
+      "cryptocurrency",
+      "Bitcoin",
+      "ethereum",
+      "SecurityAnalysis",
+      "ValueInvesting",
+      "pennystocks",
+      "options",
+      "StockMarket",
+      "technology",
+      "startups"
+    ],
+    "categories": [
+      "Finance",
+      "Technology", 
+      "Cryptocurrency",
+      "Trading"
+    ]
+  }
+}
