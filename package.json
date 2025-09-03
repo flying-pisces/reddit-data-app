@@ -1,0 +1,88 @@
+{
+  "name": "reddit-insight-app",
+  "version": "1.0.0",
+  "description": "AI-powered Reddit content discovery and analysis app",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "npm run build && electron-builder",
+    "dist": "npm run build && electron-builder --publish=never",
+    "backend": "python -m backend.main",
+    "dev": "concurrently \"npm run backend\" \"npm start\"",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "reddit",
+    "ai",
+    "news",
+    "analysis",
+    "personalization"
+  ],
+  "author": "flying-pisces",
+  "license": "MIT",
+  "homepage": "./",
+  "main": "build/electron/main.js",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.8.1",
+    "react-spring": "^9.6.1",
+    "react-gesture-handler": "^2.9.0",
+    "firebase": "^9.17.1",
+    "chart.js": "^4.2.1",
+    "react-chartjs-2": "^5.2.0",
+    "axios": "^1.3.4",
+    "styled-components": "^5.3.6",
+    "framer-motion": "^9.0.7",
+    "react-hot-toast": "^2.4.0",
+    "lucide-react": "^0.312.0"
+  },
+  "devDependencies": {
+    "electron": "^22.2.0",
+    "electron-builder": "^23.6.0",
+    "concurrently": "^7.6.0",
+    "wait-on": "^7.0.1",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^4.9.5"
+  },
+  "build": {
+    "appId": "com.flyingpisces.reddit-insight",
+    "productName": "Reddit Insight",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.news",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
