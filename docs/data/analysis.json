@@ -1,11 +1,10 @@
 {
   "overall_sentiment": "Bullish",
-  "sentiment_score": 70,
+  "sentiment_score": 50,
   "insights": [
-    "\ud83d\udcca 17 posts with 500+ upvotes indicate high market interest",
-    "\ud83d\udcad Overall sentiment: Bullish based on 25 posts",
-    "\ud83d\udd58 US market hours - increased trading activity expected"
+    "\ud83d\udcca 20 posts with 500+ upvotes indicate high market interest",
+    "\ud83d\udcad Overall sentiment: Bullish based on 25 posts"
   ],
-  "high_activity_count": 17,
-  "analysis_timestamp": "2025-12-10T16:38:27.464866+00:00"
+  "high_activity_count": 20,
+  "analysis_timestamp": "2025-12-10T17:31:38.716810+00:00"
 }
