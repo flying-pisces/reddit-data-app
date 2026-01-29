@@ -1,11 +1,11 @@
 {
   "subreddit_stats": {
-    "investing": 12,
-    "wallstreetbets": 9,
-    "stocks": 4
+    "wallstreetbets": 14,
+    "investing": 5,
+    "stocks": 6
   },
   "metadata": {
-    "last_updated": "2026-01-29T14:50:13.670762+00:00",
+    "last_updated": "2026-01-29T15:46:10.939681+00:00",
     "total_posts": 25,
     "total_tickers": 0,
     "subreddits_monitored": 3,
