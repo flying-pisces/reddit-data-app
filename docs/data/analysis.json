@@ -1,10 +1,10 @@
 {
-  "overall_sentiment": "Neutral",
-  "sentiment_score": 0,
+  "overall_sentiment": "Bearish",
+  "sentiment_score": -30,
   "insights": [
-    "\ud83d\udcca 18 posts with 500+ upvotes indicate high market interest",
-    "\ud83d\udcad Overall sentiment: Neutral based on 25 posts"
+    "\ud83d\udcca 22 posts with 500+ upvotes indicate high market interest",
+    "\ud83d\udcad Overall sentiment: Bearish based on 25 posts"
   ],
-  "high_activity_count": 18,
-  "analysis_timestamp": "2026-02-19T19:03:19.197058+00:00"
+  "high_activity_count": 22,
+  "analysis_timestamp": "2026-02-19T19:44:37.088014+00:00"
 }
