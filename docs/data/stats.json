@@ -1,13 +1,14 @@
 {
   "subreddit_stats": {
-    "investing": 13,
-    "wallstreetbets": 12
+    "stocks": 12,
+    "wallstreetbets": 8,
+    "investing": 5
   },
   "metadata": {
-    "last_updated": "2026-09-30T13:34:31.640450+00:00",
+    "last_updated": "2026-09-30T19:05:08.974349+00:00",
     "total_posts": 25,
     "total_tickers": 0,
-    "subreddits_monitored": 2,
+    "subreddits_monitored": 3,
     "data_source": "Live Reddit API",
     "update_frequency": "Hourly",
     "time_period": "Live Data"
